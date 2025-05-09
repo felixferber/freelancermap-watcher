@@ -21,14 +21,26 @@ console.log(`Lade Projekte von: ${URL}`);
 
         for (const p of newProjects) {
             const url = `https://www.freelancermap.de${p.links.project}`;
+            const city = p.city || null;
+            const startDate = (p.beginningMonth && p.beginningYear) ? `${p.beginningMonth}/${p.beginningYear}` : null;
+            const desc = p.description ? p.description.replace(/\r\n|\n|\r/g, ' ').slice(0, 280) : null;
+
+            let message = '';
+            if (city) message += `📍 ${city}`;
+            if (startDate) message += (message ? ' · ' : '') + `📅 ${startDate}`;
+            if (desc) message += (message ? '\n' : '') + `📝 ${desc}`;
+
             console.log(`Neues Projekt gefunden: ${p.title}`);
-            await axios.post(`https://ntfy.sh/${PUSH_TOPIC}`, 'Jetzt ansehen', {
+            console.log(`→ ${message}`);
+
+            await axios.post(`https://ntfy.sh/${PUSH_TOPIC}`, message || 'Jetzt ansehen', {
                 headers: {
                     Title: p.title,
                     Click: url,
                     Tags: 'rocket'
                 }
             });
+
             console.log(`Push gesendet für: ${p.title}`);
         }
 
