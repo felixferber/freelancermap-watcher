@@ -20,7 +20,7 @@ console.log(`Lade Projekte von: ${URL}`);
         const newProjects = projects.filter(p => new Date(p.created) > threshold);
 
         for (const p of newProjects) {
-            const url = `https://www.freelancermap.de/projekt/${p.slug}`;
+            const url = `https://www.freelancermap.de${p.links.project}`;
             console.log(`Neues Projekt gefunden: ${p.title}`);
             await axios.post(`https://ntfy.sh/${PUSH_TOPIC}`, 'Jetzt ansehen', {
                 headers: {
