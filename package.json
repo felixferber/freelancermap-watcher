@@ -1,6 +1,6 @@
 {
   "name": "freelancermap-watcher",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "type": "module",
   "description": "Überwacht Freelancermap-Projekte basierend auf einem Suchbegriff und sendet Push-Nachrichten via ntfy.sh.",
   "author": "Felix Ferber <felix@ferber-digital.com>",
