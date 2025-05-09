@@ -2,23 +2,30 @@ name: Check Freelancermap Projects
 
 on:
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: '*/15 * * * *'  # alle 15 Minuten
   workflow_dispatch:
+    inputs:
+      query:
+        description: 'Suchbegriff für Freelancermap (z.B. angular, java, python)'
+        required: false
+        default: 'angular'
 
 jobs:
   check:
     runs-on: ubuntu-latest
+    env:
+      QUERY: ${{ github.event.inputs.query || 'angular' }}
     steps:
-      - name: Checkout Repo
+      - name: Repository auschecken
         uses: actions/checkout@v3
 
-      - name: Setup Node
+      - name: Node.js einrichten
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-      - name: Install Dependencies
+      - name: Abhängigkeiten installieren
         run: npm install
 
-      - name: Run Script
+      - name: Script ausführen
         run: npm start
