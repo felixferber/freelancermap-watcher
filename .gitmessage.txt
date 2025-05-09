@@ -1,0 +1,13 @@
+# Commit Message Format (Conventional Commits):
+#
+# <type>[optional scope]: <description>
+#
+# Beispiele:
+# feat: neues Feature
+# fix(ui): Fehler in UI-Komponente behoben
+# chore(deps): Abhängigkeiten aktualisiert
+# docs(readme): Dokumentation überarbeitet
+#
+# Hinweise:
+# - Type: feat, fix, chore, docs, refactor, test, style
+# - Vermeide zu lange Titel (> 72 Zeichen)
