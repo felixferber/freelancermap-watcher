@@ -1,0 +1,25 @@
+name: Check Freelancermap Symfony Projects
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'  # alle 15 Minuten
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      QUERY: symfony
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v3
+
+      - name: Node.js einrichten
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Abhängigkeiten installieren
+        run: npm install
+
+      - name: Symfony-Projekte abrufen
+        run: npm start
